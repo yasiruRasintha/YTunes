@@ -1,0 +1,106 @@
+<HTML>
+<Head>
+</Head>
+<body>
+<audio id="myMusic" controls>
+  <source src="circle.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+<button onclick="loop()">In</button>
+<button onclick="loopOut()">Out</button>
+<div class="slidecontainer">
+  <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+  <p>Speed: <span id="demo"></span></p>
+  <p>SpeedOfSound: <span id="demo2"></span></p>
+</div>
+<script type="text/javascript">
+	var audio = document.getElementById("myMusic"); 
+	var time = 0;
+	var secondTime = 10000;
+	var i = 0;
+	var speed = 0;
+	var difference = 0;
+	var myInterval;
+	var slider = document.getElementById("myRange");
+	var output = document.getElementById("demo");
+	var output = document.getElementById("demo2");
+	slider.value = audio.playbackRate;
+	output.innerHTML = slider.value;
+	output.innerHTML = audio.playbackRate;
+	slider.oninput = function() {
+		speed++;
+		output.innerHTML = this.value;
+		audio.playbackRate = speed;
+}
+	
+	function intervalTime() {
+	 myInterval = setInterval(function() {
+		if(audio.currentTime > secondTime){
+			audio.currentTime = time;
+		}
+		console.log(time);
+		},500);
+		}
+	function loop() {
+			time = audio.currentTime;
+		}
+	function loopOut() {
+			i++;
+			if(i > 1){
+				clearInterval(myInterval);
+				i = 0;
+				difference = 1;
+			}else{
+			secondTime = audio.currentTime;
+			audio.currentTime = time;
+			if(difference = 1){
+				intervalTime();	
+			}
+				}
+			}
+
+	
+	
+</script>
+<style>
+.slidecontainer {
+    width: 100%; /* Width of the outside container */
+}
+
+/* The slider itself */
+.slider {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 100%; /* Full-width */
+    height: 25px; /* Specified height */
+    background: #d3d3d3; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */ 
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: #4CAF50; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: #4CAF50; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+}
+</style>
+</body>
+</HTML>
